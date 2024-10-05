@@ -42,7 +42,7 @@ public class PersonDirectory {
     public void deletePerson(Person person) {
         persons.remove(person);
     }
-
+ 
     // Method to search for a Person by their first and last name
  public Person searchPerson(String searchValue) {
     for (Person p : persons) {
@@ -56,7 +56,14 @@ public class PersonDirectory {
     }
     return null;
 }
-
+public Person findPersonByEmail(String email) {
+    for (Person person : persons) {  // Assuming `persons` is the list of Person objects
+        if (person.getEmail().equalsIgnoreCase(email)) {
+            return person;
+        }
+    }
+    return null;  // If no person is found with the given email
+}
 }
 
   

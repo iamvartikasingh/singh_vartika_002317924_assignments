@@ -51,7 +51,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
         txtSocialSecurityNumber = new javax.swing.JTextField();
         txtGender = new javax.swing.JTextField();
         txtHeight = new javax.swing.JTextField();
-        txtEmailId = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         txtWorkState = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtWorkPhoneNumber = new javax.swing.JTextField();
@@ -252,7 +252,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                                         .addComponent(txtWorkUnitNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtWorkZipCode, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtWorkPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addComponent(txtEmailId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(54, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -278,7 +278,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
                                 .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtEmailId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,7 +369,7 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          String firstName = txtFirstName.getText();
 String lastName = txtLastName.getText();
-String email = txtEmailId.getText();
+String email = txtEmail.getText();
 String ageStr = txtAge.getText();
 String heightStr = txtHeight.getText();
 String socialSecurityNumberStr = txtSocialSecurityNumber.getText();
@@ -483,7 +483,7 @@ try {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtAge;
-    private javax.swing.JTextField txtEmailId;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtGender;
     private javax.swing.JTextField txtHeight;
@@ -508,7 +508,7 @@ try {
     // Populate fields with person data
     txtFirstName.setText(person.getFirstName());
     txtLastName.setText(person.getLastName());
-    txtEmailId.setText(person.getEmail());
+    txtEmail.setText(person.getEmail());
     txtAge.setText(String.valueOf(person.getAge()));
     txtHeight.setText(String.valueOf(person.getHeight()));
     txtSocialSecurityNumber.setText(String.valueOf(person.getSocialSecurityNumber()));
@@ -534,7 +534,7 @@ private void setViewMode() {
     // Disable fields for view mode
     txtFirstName.setEnabled(false);
     txtLastName.setEnabled(false);
-    txtEmailId.setEnabled(false);
+    txtEmail.setEnabled(false);
     txtAge.setEnabled(false);
     txtHeight.setEnabled(false);
     txtSocialSecurityNumber.setEnabled(false);
@@ -564,7 +564,7 @@ private void setEditMode() {
     // Enable fields for editing mode
     txtFirstName.setEnabled(true);
     txtLastName.setEnabled(true);
-    txtEmailId.setEnabled(true);
+    txtEmail.setEnabled(true);
     txtAge.setEnabled(true);
     txtHeight.setEnabled(true);
     txtSocialSecurityNumber.setEnabled(true);

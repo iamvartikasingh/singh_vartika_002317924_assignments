@@ -5,12 +5,13 @@
 package ui.PersonManager;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Person;
 import model.PersonDirectory;
 
-import javax.swing.JOptionPane;
+
 /**
  *
  * @author vartika
@@ -48,22 +49,23 @@ public class ViewListPersonJPanel extends javax.swing.JPanel {
         tblPersons = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        btnDeleteRow = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(222, 247, 255));
 
         tblPersons.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Age", "Gender", "Email", "SSN", "Height", "Home Address ", "Work Address", "Phone Number"
+                "Name", "Age", "Gender", "Email", "SSN", "Height", "Home Street ", "Home City", "Home State", "Home Zip", "Home PhoneNumber", "Work Street", "Work City", "Work State", "Work Zip", "Work Phone Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                true, true, true, true, false, true, true, false, true, true, true, true, true, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -86,20 +88,32 @@ public class ViewListPersonJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDeleteRow.setText("Delete Row");
+        btnDeleteRow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteRowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(btnBack)
-                .addGap(519, 519, 519)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnBack)
+                        .addGap(519, 519, 519)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(btnDeleteRow)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +124,9 @@ public class ViewListPersonJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
-                .addGap(127, 127, 127))
+                .addGap(50, 50, 50)
+                .addComponent(btnDeleteRow)
+                .addGap(54, 54, 54))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,9 +137,52 @@ public class ViewListPersonJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnDeleteRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRowActionPerformed
+        // TODO add your handling code here:
+
+       int selectedRow = tblPersons.getSelectedRow();  // Get the selected row index
+System.out.println("Selected row: " + selectedRow);
+
+if (selectedRow >= 0) {
+    int dialogButton = JOptionPane.YES_NO_OPTION;
+    int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected person?", "Warning", dialogButton);
+
+    if (dialogResult == JOptionPane.YES_OPTION) {
+        // Assuming the email is in column 3 (adjust the column index as necessary)
+        Object emailObj = tblPersons.getValueAt(selectedRow, 3);  // Adjust column index based on where the email is stored
+
+        // Check if the retrieved value is a String (since email is usually a String)
+        if (emailObj instanceof String) {
+            String email = (String) emailObj;
+            System.out.println("Person Email: " + email);
+
+            // Now, find the person using the email from the personDirectory
+            Person selectedPerson = personDirectory.findPersonByEmail(email);
+
+            if (selectedPerson != null) {
+                System.out.println("Selected Person: " + selectedPerson);
+
+                // Delete the person from the directory
+                personDirectory.deletePerson(selectedPerson);
+
+                // Refresh the table after deletion
+                populateTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Person not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            System.out.println("Error: The value in the email column is not a String.");
+        }
+    }
+} else {
+    JOptionPane.showMessageDialog(null, "Please select a person from the list.", "Warning", JOptionPane.WARNING_MESSAGE);
+}
+    }//GEN-LAST:event_btnDeleteRowActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDeleteRow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPersons;
@@ -148,17 +207,19 @@ void populateTable() {
         row[4] = p.getSocialSecurityNumber();
         row[5] = p.getHeight();
 
-        // Combine home and work addresses
-        String homeAddress = p.getHomeStreet() + " " + p.getHomeUnitNumber() + ", " + p.getHomeCity() + ", " + p.getHomeState() + " - " + p.getHomeZipCode();
-        String workAddress = p.getWorkStreet() + " " + p.getWorkUnitNumber() + ", " + p.getWorkCity() + ", " + p.getWorkState() + " - " + p.getWorkZipCode();
-        
-        row[6] = "Home: " + homeAddress ;// Combining both addresses into a single cell
+        // Home address details
+        row[6] = p.getHomeStreet() + " " + p.getHomeUnitNumber();
+        row[7] = p.getHomeCity();
+        row[8] = p.getHomeState();
+        row[9] = p.getHomeZipCode();
+        row[10] = p.getHomePhoneNumber();
 
-        // Combine phone numbers if needed
-        row[7] =  "Work: " + workAddress; 
-        
-        row[8] = "Home Phone: " + p.getHomePhoneNumber() + "\nWork Phone: " + p.getWorkPhoneNumber();
-
+        // Work address details
+        row[11] = p.getWorkStreet() + " " + p.getWorkUnitNumber();
+        row[12] = p.getWorkCity();
+        row[13] = p.getWorkState();
+        row[14] = p.getWorkZipCode();
+        row[15] = p.getWorkPhoneNumber();
         model.addRow(row);
     }
 }
