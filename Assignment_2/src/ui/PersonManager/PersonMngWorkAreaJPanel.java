@@ -38,7 +38,7 @@ public class PersonMngWorkAreaJPanel extends javax.swing.JPanel {
         btnManageAccount = new javax.swing.JButton();
         btnManageAccount1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(232, 249, 249));
 
         btnCreateAccount.setText("Create Person");
         btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
