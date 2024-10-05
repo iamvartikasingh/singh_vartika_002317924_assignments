@@ -40,6 +40,7 @@ public class PersonMngWorkAreaJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(232, 249, 249));
 
+        btnCreateAccount.setFont(new java.awt.Font("Heiti TC", 0, 18)); // NOI18N
         btnCreateAccount.setText("Create Person");
         btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,6 +48,7 @@ public class PersonMngWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnManageAccount.setFont(new java.awt.Font("Heiti TC", 0, 18)); // NOI18N
         btnManageAccount.setText("Manage Person");
         btnManageAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +56,7 @@ public class PersonMngWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnManageAccount1.setFont(new java.awt.Font("Heiti TC", 0, 18)); // NOI18N
         btnManageAccount1.setText("Search Person");
         btnManageAccount1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

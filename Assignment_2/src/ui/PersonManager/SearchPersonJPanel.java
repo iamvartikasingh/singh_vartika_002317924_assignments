@@ -42,7 +42,7 @@ public class SearchPersonJPanel extends javax.swing.JPanel {
         btnSearch = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(225, 255, 255));
 
         txtSearchBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

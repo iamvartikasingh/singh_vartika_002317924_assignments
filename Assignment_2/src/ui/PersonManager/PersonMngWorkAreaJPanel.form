@@ -49,6 +49,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnCreateAccount">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Heiti TC" size="18" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Create Person"/>
       </Properties>
       <Events>
@@ -57,6 +60,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnManageAccount">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Heiti TC" size="18" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Manage Person"/>
       </Properties>
       <Events>
@@ -65,6 +71,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnManageAccount1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Heiti TC" size="18" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Search Person"/>
       </Properties>
       <Events>

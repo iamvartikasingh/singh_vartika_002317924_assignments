@@ -52,6 +52,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         topJPanel.setBackground(new java.awt.Color(0, 153, 153));
 
+        btnOpen.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         btnOpen.setText("Open Person Manager");
         btnOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,15 +66,15 @@ public class MainJFrame extends javax.swing.JFrame {
             topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topJPanelLayout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1298, Short.MAX_VALUE))
+                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1163, Short.MAX_VALUE))
         );
         topJPanelLayout.setVerticalGroup(
             topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topJPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         splitPane.setTopComponent(topJPanel);
