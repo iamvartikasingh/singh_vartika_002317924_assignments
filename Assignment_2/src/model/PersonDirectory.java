@@ -44,14 +44,19 @@ public class PersonDirectory {
     }
 
     // Method to search for a Person by their first and last name
-    public Person searchPerson(String firstName, String lastName) {
-        for (Person p : persons) {
-            if (p.getFirstName().equalsIgnoreCase(firstName) && p.getLastName().equalsIgnoreCase(lastName)) {
-                return p;
-            }
+ public Person searchPerson(String searchValue) {
+    for (Person p : persons) {
+        // Check if the search value matches first name, last name, or street address
+        if (p.getFirstName().equalsIgnoreCase(searchValue) || 
+            p.getLastName().equalsIgnoreCase(searchValue) || 
+            p.getWorkStreet().equalsIgnoreCase(searchValue) ||
+            p.getHomeStreet().equalsIgnoreCase(searchValue)) {
+            return p;
         }
-        return null;
     }
+    return null;
+}
+
 }
 
   

@@ -13,14 +13,14 @@ public class Person {
     private int age;           // Integer for age
     private char gender;       // Character to represent gender (e.g., 'M' for Male, 'F' for Female)
     private double height;     // Double to represent height in meters
-    private boolean isEmployed; // Boolean to indicate employment status
+   
     private long socialSecurityNumber; // Social Security Number (using 'long' as a primitive type)
 
     // Reference types (non-primitive)
     private String firstName;
     private String lastName;
     private String email;
-    private String phoneNumber;  // General contact number
+   // General contact number
 
     // Home Address fields
     private String homeStreet;
@@ -62,14 +62,6 @@ public class Person {
         this.height = height;
     }
 
-    public boolean isIsEmployed() {
-        return isEmployed;
-    }
-
-    public void setIsEmployed(boolean isEmployed) {
-        this.isEmployed = isEmployed;
-    }
-
     public long getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
@@ -102,14 +94,7 @@ public class Person {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
+ 
     public String getHomeStreet() {
         return homeStreet;
     }

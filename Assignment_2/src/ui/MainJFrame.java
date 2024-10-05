@@ -4,17 +4,30 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import model.Person;
+import model.PersonDirectory;
+import ui.PersonManager.PersonMngWorkAreaJPanel;
+import ui.PersonManager.ViewPersonJPanel;
+
 /**
  *
  * @author vartika
  */
 public class MainJFrame extends javax.swing.JFrame {
+     
+   
+     private PersonDirectory personDirectory;
+
 
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+        
+        this.personDirectory = new PersonDirectory();
+        generateDemodata();
     }
 
     /**
@@ -27,133 +40,71 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         splitPane = new javax.swing.JSplitPane();
-        controlPanel = new javax.swing.JPanel();
-        btnAddPerson = new javax.swing.JButton();
-        btnViewList = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        workArea = new javax.swing.JPanel();
+        topJPanel = new javax.swing.JPanel();
+        btnOpen = new javax.swing.JButton();
+        userProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        splitPane.setDividerLocation(250);
+        splitPane.setDividerLocation(120);
         splitPane.setDividerSize(2);
+        splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        controlPanel.setBackground(new java.awt.Color(0, 153, 153));
+        topJPanel.setBackground(new java.awt.Color(0, 153, 153));
 
-        btnAddPerson.setFont(new java.awt.Font("Heiti TC", 0, 14)); // NOI18N
-        btnAddPerson.setForeground(new java.awt.Color(51, 51, 51));
-        btnAddPerson.setText("+ Add Person");
-        btnAddPerson.setBorder(null);
-        btnAddPerson.addActionListener(new java.awt.event.ActionListener() {
+        btnOpen.setText("Open Person Manager");
+        btnOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPersonActionPerformed(evt);
+                btnOpenActionPerformed(evt);
             }
         });
 
-        btnViewList.setFont(new java.awt.Font("Heiti TC", 0, 14)); // NOI18N
-        btnViewList.setForeground(new java.awt.Color(51, 51, 51));
-        btnViewList.setText("View List ");
-        btnViewList.setBorder(null);
-        btnViewList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewListActionPerformed(evt);
-            }
-        });
-
-        btnSearch.setFont(new java.awt.Font("Heiti TC", 0, 14)); // NOI18N
-        btnSearch.setText("Search");
-
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Enter name or Address");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Heiti SC", 1, 26)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Person Profile");
-
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
-                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnViewList, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(49, 49, 49))))
+        javax.swing.GroupLayout topJPanelLayout = new javax.swing.GroupLayout(topJPanel);
+        topJPanel.setLayout(topJPanelLayout);
+        topJPanelLayout.setHorizontalGroup(
+            topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topJPanelLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1298, Short.MAX_VALUE))
         );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(btnAddPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnViewList, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(181, 181, 181)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+        topJPanelLayout.setVerticalGroup(
+            topJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topJPanelLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(btnOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        splitPane.setTopComponent(controlPanel);
+        splitPane.setTopComponent(topJPanel);
 
-        workArea.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
-        workArea.setLayout(workAreaLayout);
-        workAreaLayout.setHorizontalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
-        );
-        workAreaLayout.setVerticalGroup(
-            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 621, Short.MAX_VALUE)
-        );
-
-        splitPane.setRightComponent(workArea);
+        userProcessContainer.setBackground(new java.awt.Color(255, 255, 255));
+        userProcessContainer.setLayout(new java.awt.CardLayout());
+        splitPane.setRightComponent(userProcessContainer);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane)
+            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane)
+            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnViewListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewListActionPerformed
+    private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewListActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void btnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddPersonActionPerformed
+        PersonMngWorkAreaJPanel panel = new PersonMngWorkAreaJPanel(userProcessContainer, personDirectory);
+        userProcessContainer.add("PersonMngWorkAreaJPanel", panel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+       
+    }//GEN-LAST:event_btnOpenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,13 +142,147 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddPerson;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnViewList;
-    private javax.swing.JPanel controlPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnOpen;
     private javax.swing.JSplitPane splitPane;
-    private javax.swing.JPanel workArea;
+    private javax.swing.JPanel topJPanel;
+    private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
+
+    private void generateDemodata() { 
+        
+     
+    
+    // Creating first Person object
+    Person person1 = personDirectory.addPerson();
+    person1.setFirstName("John");
+    person1.setLastName("Doe");
+    person1.setEmail("john.doe@example.com");
+    person1.setAge(30);
+    person1.setHeight(1.75); // height in meters
+    person1.setSocialSecurityNumber(123456789L);
+    person1.setGender('M');
+
+    // Home Address for person1
+    person1.setHomeStreet("123 Elm Street");
+    person1.setHomeUnitNumber("Apt 4B");
+    person1.setHomeCity("Los Angeles");
+    person1.setHomeState("California");
+    person1.setHomeZipCode("90001");
+    person1.setHomePhoneNumber("3105551234");
+
+    // Work Address for person1
+    person1.setWorkStreet("456 Maple Avenue");
+    person1.setWorkUnitNumber("Suite 800");
+    person1.setWorkCity("Los Angeles");
+    person1.setWorkState("California");
+    person1.setWorkZipCode("90002");
+    person1.setWorkPhoneNumber("3105555678");
+
+    
+    // Creating second Person object
+    Person person2 = personDirectory.addPerson();
+    person2.setFirstName("Jane");
+    person2.setLastName("Smith");
+    person2.setEmail("jane.smith@example.com");
+    person2.setAge(28);
+    person2.setHeight(1.65); // height in meters
+    person2.setSocialSecurityNumber(987654321L);
+    person2.setGender('F');
+
+    // Home Address for person2
+    person2.setHomeStreet("789 Pine Street");
+    person2.setHomeUnitNumber("House 2");
+    person2.setHomeCity("San Francisco");
+    person2.setHomeState("California");
+    person2.setHomeZipCode("94110");
+    person2.setHomePhoneNumber("4155559876");
+
+    // Work Address for person2
+    person2.setWorkStreet("101 Oak Avenue");
+    person2.setWorkUnitNumber("Floor 2");
+    person2.setWorkCity("San Francisco");
+    person2.setWorkState("California");
+    person2.setWorkZipCode("94111");
+    person2.setWorkPhoneNumber("4155554321");
+
+   // Creating third Person object
+Person person3 = personDirectory.addPerson();
+person3.setFirstName("Michael");
+person3.setLastName("Johnson");
+person3.setEmail("michael.johnson@example.com");
+person3.setAge(40);
+person3.setHeight(1.80); // height in meters
+person3.setSocialSecurityNumber(555444333L);
+person3.setGender('M');
+
+// Home Address for person3
+person3.setHomeStreet("456 Cedar Street");
+person3.setHomeUnitNumber("Apt 12C");
+person3.setHomeCity("New York");
+person3.setHomeState("New York");
+person3.setHomeZipCode("10001");
+person3.setHomePhoneNumber("2125551234");
+
+// Work Address for person3
+person3.setWorkStreet("789 Birch Avenue");
+person3.setWorkUnitNumber("Office 200");
+person3.setWorkCity("New York");
+person3.setWorkState("New York");
+person3.setWorkZipCode("10002");
+person3.setWorkPhoneNumber("2125555678");
+
+// Creating fourth Person object
+Person person4 = personDirectory.addPerson();
+person4.setFirstName("Emily");
+person4.setLastName("Williams");
+person4.setEmail("emily.williams@example.com");
+person4.setAge(35);
+person4.setHeight(1.68); // height in meters
+person4.setSocialSecurityNumber(123987456L);
+person4.setGender('F');
+
+// Home Address for person4
+person4.setHomeStreet("321 Spruce Street");
+person4.setHomeUnitNumber("Apt 8D");
+person4.setHomeCity("Chicago");
+person4.setHomeState("Illinois");
+person4.setHomeZipCode("60601");
+person4.setHomePhoneNumber("3125559876");
+
+// Work Address for person4
+person4.setWorkStreet("123 Oak Boulevard");
+person4.setWorkUnitNumber("Suite 500");
+person4.setWorkCity("Chicago");
+person4.setWorkState("Illinois");
+person4.setWorkZipCode("60602");
+person4.setWorkPhoneNumber("3125554321");
+
+// Creating fifth Person object
+Person person5 = personDirectory.addPerson();
+person5.setFirstName("David");
+person5.setLastName("Brown");
+person5.setEmail("david.brown@example.com");
+person5.setAge(45);
+person5.setHeight(1.85); // height in meters
+person5.setSocialSecurityNumber(654789123L);
+person5.setGender('M');
+
+// Home Address for person5
+person5.setHomeStreet("789 Ash Street");
+person5.setHomeUnitNumber("House 15");
+person5.setHomeCity("Houston");
+person5.setHomeState("Texas");
+person5.setHomeZipCode("77001");
+person5.setHomePhoneNumber("7135554321");
+
+// Work Address for person5
+person5.setWorkStreet("987 Maple Boulevard");
+person5.setWorkUnitNumber("Office 101");
+person5.setWorkCity("Houston");
+person5.setWorkState("Texas");
+person5.setWorkZipCode("77002");
+person5.setWorkPhoneNumber("7135555678");
 }
+
+    }
+
