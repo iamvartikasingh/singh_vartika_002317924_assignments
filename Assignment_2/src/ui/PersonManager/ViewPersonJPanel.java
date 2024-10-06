@@ -7,6 +7,7 @@ package ui.PersonManager;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 
@@ -364,7 +365,8 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-         String firstName = txtFirstName.getText();
+      // Get basic person fields from the input
+String firstName = txtFirstName.getText();
 String lastName = txtLastName.getText();
 String email = txtEmail.getText();
 String ageStr = txtAge.getText();
@@ -372,7 +374,7 @@ String heightStr = txtHeight.getText();
 String socialSecurityNumberStr = txtSocialSecurityNumber.getText();
 String genderStr = txtGender.getText();
 
-// Home address fields
+// Get home address fields from the input
 String homeStreet = txtHomeStreet.getText();
 String homeUnitNumber = txtHomeUnitNumber.getText();
 String homeCity = txtHomeCity.getText();
@@ -380,7 +382,7 @@ String homeState = txtHomeState.getText();
 String homeZipCode = txtHomeZipCode.getText();
 String homePhoneNumber = txtHomePhoneNumber.getText();
 
-// Work address fields
+// Get work address fields from the input
 String workStreet = txtWorkStreet.getText();
 String workUnitNumber = txtWorkUnitNumber.getText();
 String workCity = txtWorkCity.getText();
@@ -388,20 +390,20 @@ String workState = txtWorkState.getText();
 String workZipCode = txtWorkZipCode.getText();
 String workPhoneNumber = txtWorkPhoneNumber.getText();
 
-// Validate if mandatory fields are filled
+// Validate mandatory fields
 if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || homeStreet.isBlank() || homeCity.isBlank() || homeState.isBlank() || homeZipCode.isBlank()) {
     JOptionPane.showMessageDialog(null, "All mandatory fields must be filled.", "Error", JOptionPane.ERROR_MESSAGE);
     return;
 }
 
 try {
-    // Parse numeric fields and assign to the person
+    // Parse numeric fields
     int age = Integer.parseInt(ageStr);
     double height = Double.parseDouble(heightStr);
     long socialSecurityNumber = Long.parseLong(socialSecurityNumberStr);
-    char gender = genderStr.charAt(0); // Assuming it's a single character input like 'M' or 'F'
-    
-    // Update the person object
+    char gender = genderStr.charAt(0); // Assuming single-character input like 'M' or 'F'
+
+    // Update the person object with basic details
     person.setFirstName(firstName);
     person.setLastName(lastName);
     person.setEmail(email);
@@ -410,28 +412,20 @@ try {
     person.setSocialSecurityNumber(socialSecurityNumber);
     person.setGender(gender);
 
-    // Set home address
-    person.setHomeStreet(homeStreet);
-    person.setHomeUnitNumber(homeUnitNumber);
-    person.setHomeCity(homeCity);
-    person.setHomeState(homeState);
-    person.setHomeZipCode(homeZipCode);
-    person.setHomePhoneNumber(homePhoneNumber);
+    // Create and set home address
+    Address homeAddress = new Address(homeStreet, homeUnitNumber, homeCity, homeState, homeZipCode, homePhoneNumber);
+    person.setHomeAddress(homeAddress);
 
-    // Set work address
-    person.setWorkStreet(workStreet);
-    person.setWorkUnitNumber(workUnitNumber);
-    person.setWorkCity(workCity);
-    person.setWorkState(workState);
-    person.setWorkZipCode(workZipCode);
-    person.setWorkPhoneNumber(workPhoneNumber);
+    // Create and set work address
+    Address workAddress = new Address(workStreet, workUnitNumber, workCity, workState, workZipCode, workPhoneNumber);
+    person.setWorkAddress(workAddress);
 
     // Show success message
     JOptionPane.showMessageDialog(null, "Person data successfully updated.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
     // Switch to view mode after updating the data
     setViewMode();
-    
+
 } catch (NumberFormatException e) {
     JOptionPane.showMessageDialog(null, "Please ensure age, height, and social security number are valid numeric values.", "Error", JOptionPane.ERROR_MESSAGE);
 }
@@ -510,85 +504,74 @@ try {
     txtHeight.setText(String.valueOf(person.getHeight()));
     txtSocialSecurityNumber.setText(String.valueOf(person.getSocialSecurityNumber()));
     txtGender.setText(String.valueOf(person.getGender()));
-    
-    // Home Address fields
-    txtHomeStreet.setText(person.getHomeStreet());
-    txtHomeUnitNumber.setText(person.getHomeUnitNumber());
-    txtHomeCity.setText(person.getHomeCity());
-    txtHomeState.setText(person.getHomeState());
-    txtHomeZipCode.setText(person.getHomeZipCode());
-    txtHomePhoneNumber.setText(person.getHomePhoneNumber());
 
-    // Work Address fields
-    txtWorkStreet.setText(person.getWorkStreet());
-    txtWorkUnitNumber.setText(person.getWorkUnitNumber());
-    txtWorkCity.setText(person.getWorkCity());
-    txtWorkState.setText(person.getWorkState());
-    txtWorkZipCode.setText(person.getWorkZipCode());
-    txtWorkPhoneNumber.setText(person.getWorkPhoneNumber());
+    // Populate home address fields
+    if (person.getHomeAddress() != null) {
+        Address homeAddress = person.getHomeAddress();
+        txtHomeStreet.setText(homeAddress.getStreet());
+        txtHomeUnitNumber.setText(homeAddress.getUnitNumber());
+        txtHomeCity.setText(homeAddress.getCity());
+        txtHomeState.setText(homeAddress.getState());
+        txtHomeZipCode.setText(homeAddress.getZipCode());
+        txtHomePhoneNumber.setText(homeAddress.getPhoneNumber());
+    }
+
+    // Populate work address fields
+    if (person.getWorkAddress() != null) {
+        Address workAddress = person.getWorkAddress();
+        txtWorkStreet.setText(workAddress.getStreet());
+        txtWorkUnitNumber.setText(workAddress.getUnitNumber());
+        txtWorkCity.setText(workAddress.getCity());
+        txtWorkState.setText(workAddress.getState());
+        txtWorkZipCode.setText(workAddress.getZipCode());
+        txtWorkPhoneNumber.setText(workAddress.getPhoneNumber());
+    }
 }
+
 private void setViewMode() {
-    // Disable fields for view mode
-    txtFirstName.setEnabled(false);
-    txtLastName.setEnabled(false);
-    txtEmail.setEnabled(false);
-    txtAge.setEnabled(false);
-    txtHeight.setEnabled(false);
-    txtSocialSecurityNumber.setEnabled(false);
-    txtGender.setEnabled(false);
-
-    // Home Address fields
-    txtHomeStreet.setEnabled(false);
-    txtHomeUnitNumber.setEnabled(false);
-    txtHomeCity.setEnabled(false);
-    txtHomeState.setEnabled(false);
-    txtHomeZipCode.setEnabled(false);
-    txtHomePhoneNumber.setEnabled(false);
-
-    // Work Address fields
-    txtWorkStreet.setEnabled(false);
-    txtWorkUnitNumber.setEnabled(false);
-    txtWorkCity.setEnabled(false);
-    txtWorkState.setEnabled(false);
-    txtWorkZipCode.setEnabled(false);
-    txtWorkPhoneNumber.setEnabled(false);
+    // Set fields to view mode (disabled)
+    setFieldsEnabled(false);
 
     // Enable/disable buttons accordingly
     btnSave.setEnabled(false);
     btnUpdate.setEnabled(true);
 }
+
 private void setEditMode() {
-    // Enable fields for editing mode
-    txtFirstName.setEnabled(true);
-    txtLastName.setEnabled(true);
-    txtEmail.setEnabled(true);
-    txtAge.setEnabled(true);
-    txtHeight.setEnabled(true);
-    txtSocialSecurityNumber.setEnabled(true);
-    txtGender.setEnabled(true);
-
-    // Home Address fields
-    txtHomeStreet.setEnabled(true);
-    txtHomeUnitNumber.setEnabled(true);
-    txtHomeCity.setEnabled(true);
-    txtHomeState.setEnabled(true);
-    txtHomeZipCode.setEnabled(true);
-    txtHomePhoneNumber.setEnabled(true);
-
-    // Work Address fields
-    txtWorkStreet.setEnabled(true);
-    txtWorkUnitNumber.setEnabled(true);
-    txtWorkCity.setEnabled(true);
-    txtWorkState.setEnabled(true);
-    txtWorkZipCode.setEnabled(true);
-    txtWorkPhoneNumber.setEnabled(true);
+    // Set fields to edit mode (enabled)
+    setFieldsEnabled(true);
 
     // Enable/disable buttons accordingly
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);
 }
 
+private void setFieldsEnabled(boolean isEnabled) {
+    // Enable or disable basic fields
+    txtFirstName.setEnabled(isEnabled);
+    txtLastName.setEnabled(isEnabled);
+    txtEmail.setEnabled(isEnabled);
+    txtAge.setEnabled(isEnabled);
+    txtHeight.setEnabled(isEnabled);
+    txtSocialSecurityNumber.setEnabled(isEnabled);
+    txtGender.setEnabled(isEnabled);
 
+    // Enable or disable home address fields
+    txtHomeStreet.setEnabled(isEnabled);
+    txtHomeUnitNumber.setEnabled(isEnabled);
+    txtHomeCity.setEnabled(isEnabled);
+    txtHomeState.setEnabled(isEnabled);
+    txtHomeZipCode.setEnabled(isEnabled);
+    txtHomePhoneNumber.setEnabled(isEnabled);
+
+    // Enable or disable work address fields
+    txtWorkStreet.setEnabled(isEnabled);
+    txtWorkUnitNumber.setEnabled(isEnabled);
+    txtWorkCity.setEnabled(isEnabled);
+    txtWorkState.setEnabled(isEnabled);
+    txtWorkZipCode.setEnabled(isEnabled);
+    txtWorkPhoneNumber.setEnabled(isEnabled);
+}
 
 
 }

@@ -23,20 +23,9 @@ public class Person {
    // General contact number
 
     // Home Address fields
-    private String homeStreet;
-    private String homeUnitNumber;
-    private String homeCity;
-    private String homeState;
-    private String homeZipCode;
-    private String homePhoneNumber;
+    private Address homeAddress;
+    private Address workAddress;
 
-    // Work Address fields
-    private String workStreet;
-    private String workUnitNumber;
-    private String workCity;
-    private String workState;
-    private String workZipCode;
-    private String workPhoneNumber;
 
     public int getAge() {
         return age;
@@ -94,100 +83,21 @@ public class Person {
         this.email = email;
     }
 
- 
-    public String getHomeStreet() {
-        return homeStreet;
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setHomeStreet(String homeStreet) {
-        this.homeStreet = homeStreet;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
-    public String getHomeUnitNumber() {
-        return homeUnitNumber;
+    // Getter and Setter for Work Address
+    public Address getWorkAddress() {
+        return workAddress;
     }
 
-    public void setHomeUnitNumber(String homeUnitNumber) {
-        this.homeUnitNumber = homeUnitNumber;
+    public void setWorkAddress(Address workAddress) {
+        this.workAddress = workAddress;
     }
-
-    public String getHomeCity() {
-        return homeCity;
-    }
-
-    public void setHomeCity(String homeCity) {
-        this.homeCity = homeCity;
-    }
-
-    public String getHomeState() {
-        return homeState;
-    }
-
-    public void setHomeState(String homeState) {
-        this.homeState = homeState;
-    }
-
-    public String getHomeZipCode() {
-        return homeZipCode;
-    }
-
-    public void setHomeZipCode(String homeZipCode) {
-        this.homeZipCode = homeZipCode;
-    }
-
-    public String getHomePhoneNumber() {
-        return homePhoneNumber;
-    }
-
-    public void setHomePhoneNumber(String homePhoneNumber) {
-        this.homePhoneNumber = homePhoneNumber;
-    }
-
-    public String getWorkStreet() {
-        return workStreet;
-    }
-
-    public void setWorkStreet(String workStreet) {
-        this.workStreet = workStreet;
-    }
-
-    public String getWorkUnitNumber() {
-        return workUnitNumber;
-    }
-
-    public void setWorkUnitNumber(String workUnitNumber) {
-        this.workUnitNumber = workUnitNumber;
-    }
-
-    public String getWorkCity() {
-        return workCity;
-    }
-
-    public void setWorkCity(String workCity) {
-        this.workCity = workCity;
-    }
-
-    public String getWorkState() {
-        return workState;
-    }
-
-    public void setWorkState(String workState) {
-        this.workState = workState;
-    }
-
-    public String getWorkZipCode() {
-        return workZipCode;
-    }
-
-    public void setWorkZipCode(String workZipCode) {
-        this.workZipCode = workZipCode;
-    }
-
-    public String getWorkPhoneNumber() {
-        return workPhoneNumber;
-    }
-
-    public void setWorkPhoneNumber(String workPhoneNumber) {
-        this.workPhoneNumber = workPhoneNumber;
-    }
+   
 }

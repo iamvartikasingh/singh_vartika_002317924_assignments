@@ -7,6 +7,7 @@ package ui.PersonManager;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 /**
@@ -452,9 +453,9 @@ public class AddNewPersonJPanel extends javax.swing.JPanel {
                                             .addComponent(txtHomeZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtHomePhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel45))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel45)
+                                            .addComponent(txtHomePhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(98, 98, 98)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
@@ -536,98 +537,91 @@ public class AddNewPersonJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        int age;
-        double height;
-        long socialSecurityNumber;
-        char gender;
+       // Primitive fields
+int age;
+double height;
+long socialSecurityNumber;
+char gender;
 
-        String firstName = txtFirstName.getText();
-        String lastName = txtLastName.getText();
-        String email = txtEmail.getText();
+// Retrieve text inputs from the UI
+String firstName = txtFirstName.getText();
+String lastName = txtLastName.getText();
+String email = txtEmail.getText();
 
-        // Home Address fields
-        String homeStreet = txtHomeStreet.getText();
-        String homeUnitNumber = txtHomeUnitNumber.getText();
-        String homeCity = txtHomeCity.getText();
-        String homeState = txtHomeState.getText();
-        String homeZipCode = txtHomeZipCode.getText();
-        String homePhoneNumber = txtHomePhoneNumber.getText();
+// Home Address fields
+String homeStreet = txtHomeStreet.getText();
+String homeUnitNumber = txtHomeUnitNumber.getText();
+String homeCity = txtHomeCity.getText();
+String homeState = txtHomeState.getText();
+String homeZipCode = txtHomeZipCode.getText();
+String homePhoneNumber = txtHomePhoneNumber.getText();
 
-        // Work Address fields
-        String workStreet = txtWorkStreet.getText();
-        String workUnitNumber = txtWorkUnitNumber.getText();
-        String workCity = txtWorkCity.getText();
-        String workState = txtWorkState.getText();
-        String workZipCode = txtWorkZipCode.getText();
-        String workPhoneNumber = txtWorkPhoneNumber.getText();
+// Work Address fields
+String workStreet = txtWorkStreet.getText();
+String workUnitNumber = txtWorkUnitNumber.getText();
+String workCity = txtWorkCity.getText();
+String workState = txtWorkState.getText();
+String workZipCode = txtWorkZipCode.getText();
+String workPhoneNumber = txtWorkPhoneNumber.getText();
 
-        // Validation for mandatory fields
-        if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || homeStreet.isBlank() || homeCity.isBlank() || homeState.isBlank() || homeZipCode.isBlank()) {
-            JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+// Validation for mandatory fields
+if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || homeStreet.isBlank() || homeCity.isBlank() || homeState.isBlank() || homeZipCode.isBlank()) {
+    JOptionPane.showMessageDialog(this, "All fields are mandatory.", "Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
 
-        try {
-            age = Integer.parseInt(txtAge.getText());
-            height = Double.parseDouble(txtHeight.getText());
-            socialSecurityNumber = Long.parseLong(txtSocialSecurityNumber.getText());
-            gender = txtGender.getText().charAt(0); // Assumes gender is input as a single character like 'M' or 'F'
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please check the input for age, height, social security number, or gender.", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+try {
+    age = Integer.parseInt(txtAge.getText());
+    height = Double.parseDouble(txtHeight.getText());
+    socialSecurityNumber = Long.parseLong(txtSocialSecurityNumber.getText());
+    gender = txtGender.getText().charAt(0); // Assumes gender is input as a single character like 'M' or 'F'
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Please check the input for age, height, social security number, or gender.", "Warning", JOptionPane.WARNING_MESSAGE);
+    return;
+}
 
-        // Creating a new Person object and setting its attributes
-        Person p = personDirectory.addPerson();
+// Create a new Person object and set its attributes
+Person p = personDirectory.addPerson();
 
-        p.setFirstName(firstName);
-        p.setLastName(lastName);
-        p.setEmail(email);
-        p.setAge(age);
-        p.setHeight(height);
-        p.setSocialSecurityNumber(socialSecurityNumber);
-        p.setGender(gender);
+p.setFirstName(firstName);
+p.setLastName(lastName);
+p.setEmail(email);
+p.setAge(age);
+p.setHeight(height);
+p.setSocialSecurityNumber(socialSecurityNumber);
+p.setGender(gender);
 
-        // Setting home address
-        p.setHomeStreet(homeStreet);
-        p.setHomeUnitNumber(homeUnitNumber);
-        p.setHomeCity(homeCity);
-        p.setHomeState(homeState);
-        p.setHomeZipCode(homeZipCode);
-        p.setHomePhoneNumber(homePhoneNumber);
+// Creating home and work address objects and setting them in Person
+Address homeAddress = new Address(homeStreet, homeUnitNumber, homeCity, homeState, homeZipCode, homePhoneNumber);
+Address workAddress = new Address(workStreet, workUnitNumber, workCity, workState, workZipCode, workPhoneNumber);
 
-        // Setting work address
-        p.setWorkStreet(workStreet);
-        p.setWorkUnitNumber(workUnitNumber);
-        p.setWorkCity(workCity);
-        p.setWorkState(workState);
-        p.setWorkZipCode(workZipCode);
-        p.setWorkPhoneNumber(workPhoneNumber);
+p.setHomeAddress(homeAddress);  // Set home address in Person
+p.setWorkAddress(workAddress);  // Set work address in Person
 
-        JOptionPane.showMessageDialog(this, "Person successfully created.", "Information", JOptionPane.INFORMATION_MESSAGE);
+JOptionPane.showMessageDialog(this, "Person successfully created.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
-        
-        // Print all field values before clearing
-System.out.println("First Name: " + txtFirstName.getText());
-System.out.println("Last Name: " + txtLastName.getText());
-System.out.println("Email ID: " + txtEmail.getText());
-System.out.println("Age: " + txtAge.getText());
-System.out.println("Height: " + txtHeight.getText());
-System.out.println("Social Security Number: " + txtSocialSecurityNumber.getText());
-System.out.println("Gender: " + txtGender.getText());
-System.out.println("Home Street: " + txtHomeStreet.getText());
-System.out.println("Home Unit Number: " + txtHomeUnitNumber.getText());
-System.out.println("Home City: " + txtHomeCity.getText());
-System.out.println("Home State: " + txtHomeState.getText());
-System.out.println("Home Zip Code: " + txtHomeZipCode.getText());
-System.out.println("Home Phone Number: " + txtHomePhoneNumber.getText());
-System.out.println("Work Street: " + txtWorkStreet.getText());
-System.out.println("Work Unit Number: " + txtWorkUnitNumber.getText());
-System.out.println("Work City: " + txtWorkCity.getText());
-System.out.println("Work State: " + txtWorkState.getText());
-System.out.println("Work Zip Code: " + txtWorkZipCode.getText());
-System.out.println("Work Phone Number: " + txtWorkPhoneNumber.getText());
+// Print all field values before clearing
+System.out.println("First Name: " + firstName);
+System.out.println("Last Name: " + lastName);
+System.out.println("Email ID: " + email);
+System.out.println("Age: " + age);
+System.out.println("Height: " + height);
+System.out.println("Social Security Number: " + socialSecurityNumber);
+System.out.println("Gender: " + gender);
+System.out.println("Home Street: " + homeStreet);
+System.out.println("Home Unit Number: " + homeUnitNumber);
+System.out.println("Home City: " + homeCity);
+System.out.println("Home State: " + homeState);
+System.out.println("Home Zip Code: " + homeZipCode);
+System.out.println("Home Phone Number: " + homePhoneNumber);
+System.out.println("Work Street: " + workStreet);
+System.out.println("Work Unit Number: " + workUnitNumber);
+System.out.println("Work City: " + workCity);
+System.out.println("Work State: " + workState);
+System.out.println("Work Zip Code: " + workZipCode);
+System.out.println("Work Phone Number: " + workPhoneNumber);
 
+// Clear the form after creating the person
 txtFirstName.setText("");
 txtLastName.setText("");
 txtEmail.setText("");
@@ -647,8 +641,6 @@ txtWorkCity.setText("");
 txtWorkState.setText("");
 txtWorkZipCode.setText("");
 txtWorkPhoneNumber.setText("");
-
-
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

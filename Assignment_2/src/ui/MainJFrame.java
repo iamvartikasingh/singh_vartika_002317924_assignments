@@ -5,6 +5,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 import ui.PersonManager.PersonMngWorkAreaJPanel;
@@ -149,10 +150,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
 
-    private void generateDemodata() { 
-        
-     
-    
+    private void generateDemodata() {
+
     // Creating first Person object
     Person person1 = personDirectory.addPerson();
     person1.setFirstName("John");
@@ -163,23 +162,12 @@ public class MainJFrame extends javax.swing.JFrame {
     person1.setSocialSecurityNumber(123456789L);
     person1.setGender('M');
 
-    // Home Address for person1
-    person1.setHomeStreet("123 Elm Street");
-    person1.setHomeUnitNumber("Apt 4B");
-    person1.setHomeCity("Los Angeles");
-    person1.setHomeState("California");
-    person1.setHomeZipCode("90001");
-    person1.setHomePhoneNumber("3105551234");
+    // Home and Work Address for person1
+    Address homeAddress1 = new Address("123 Elm Street", "Apt 4B", "Los Angeles", "California", "90001", "3105551234");
+    Address workAddress1 = new Address("456 Maple Avenue", "Suite 800", "Los Angeles", "California", "90002", "3105555678");
+    person1.setHomeAddress(homeAddress1);
+    person1.setWorkAddress(workAddress1);
 
-    // Work Address for person1
-    person1.setWorkStreet("456 Maple Avenue");
-    person1.setWorkUnitNumber("Suite 800");
-    person1.setWorkCity("Los Angeles");
-    person1.setWorkState("California");
-    person1.setWorkZipCode("90002");
-    person1.setWorkPhoneNumber("3105555678");
-
-    
     // Creating second Person object
     Person person2 = personDirectory.addPerson();
     person2.setFirstName("Jane");
@@ -190,99 +178,59 @@ public class MainJFrame extends javax.swing.JFrame {
     person2.setSocialSecurityNumber(987654321L);
     person2.setGender('F');
 
-    // Home Address for person2
-    person2.setHomeStreet("789 Pine Street");
-    person2.setHomeUnitNumber("House 2");
-    person2.setHomeCity("San Francisco");
-    person2.setHomeState("California");
-    person2.setHomeZipCode("94110");
-    person2.setHomePhoneNumber("4155559876");
+    // Home and Work Address for person2
+    Address homeAddress2 = new Address("789 Pine Street", "House 2", "San Francisco", "California", "94110", "4155559876");
+    Address workAddress2 = new Address("101 Oak Avenue", "Floor 2", "San Francisco", "California", "94111", "4155554321");
+    person2.setHomeAddress(homeAddress2);
+    person2.setWorkAddress(workAddress2);
 
-    // Work Address for person2
-    person2.setWorkStreet("101 Oak Avenue");
-    person2.setWorkUnitNumber("Floor 2");
-    person2.setWorkCity("San Francisco");
-    person2.setWorkState("California");
-    person2.setWorkZipCode("94111");
-    person2.setWorkPhoneNumber("4155554321");
+    // Creating third Person object
+    Person person3 = personDirectory.addPerson();
+    person3.setFirstName("Michael");
+    person3.setLastName("Johnson");
+    person3.setEmail("michael.johnson@example.com");
+    person3.setAge(40);
+    person3.setHeight(1.80); // height in meters
+    person3.setSocialSecurityNumber(555444333L);
+    person3.setGender('M');
 
-   // Creating third Person object
-Person person3 = personDirectory.addPerson();
-person3.setFirstName("Michael");
-person3.setLastName("Johnson");
-person3.setEmail("michael.johnson@example.com");
-person3.setAge(40);
-person3.setHeight(1.80); // height in meters
-person3.setSocialSecurityNumber(555444333L);
-person3.setGender('M');
+    // Home and Work Address for person3
+    Address homeAddress3 = new Address("456 Cedar Street", "Apt 12C", "New York", "New York", "10001", "2125551234");
+    Address workAddress3 = new Address("789 Birch Avenue", "Office 200", "New York", "New York", "10002", "2125555678");
+    person3.setHomeAddress(homeAddress3);
+    person3.setWorkAddress(workAddress3);
 
-// Home Address for person3
-person3.setHomeStreet("456 Cedar Street");
-person3.setHomeUnitNumber("Apt 12C");
-person3.setHomeCity("New York");
-person3.setHomeState("New York");
-person3.setHomeZipCode("10001");
-person3.setHomePhoneNumber("2125551234");
+    // Creating fourth Person object
+    Person person4 = personDirectory.addPerson();
+    person4.setFirstName("Emily");
+    person4.setLastName("Williams");
+    person4.setEmail("emily.williams@example.com");
+    person4.setAge(35);
+    person4.setHeight(1.68); // height in meters
+    person4.setSocialSecurityNumber(123987456L);
+    person4.setGender('F');
 
-// Work Address for person3
-person3.setWorkStreet("789 Birch Avenue");
-person3.setWorkUnitNumber("Office 200");
-person3.setWorkCity("New York");
-person3.setWorkState("New York");
-person3.setWorkZipCode("10002");
-person3.setWorkPhoneNumber("2125555678");
+    // Home and Work Address for person4
+    Address homeAddress4 = new Address("321 Spruce Street", "Apt 8D", "Chicago", "Illinois", "60601", "3125559876");
+    Address workAddress4 = new Address("123 Oak Boulevard", "Suite 500", "Chicago", "Illinois", "60602", "3125554321");
+    person4.setHomeAddress(homeAddress4);
+    person4.setWorkAddress(workAddress4);
 
-// Creating fourth Person object
-Person person4 = personDirectory.addPerson();
-person4.setFirstName("Emily");
-person4.setLastName("Williams");
-person4.setEmail("emily.williams@example.com");
-person4.setAge(35);
-person4.setHeight(1.68); // height in meters
-person4.setSocialSecurityNumber(123987456L);
-person4.setGender('F');
+    // Creating fifth Person object
+    Person person5 = personDirectory.addPerson();
+    person5.setFirstName("David");
+    person5.setLastName("Brown");
+    person5.setEmail("david.brown@example.com");
+    person5.setAge(45);
+    person5.setHeight(1.85); // height in meters
+    person5.setSocialSecurityNumber(654789123L);
+    person5.setGender('M');
 
-// Home Address for person4
-person4.setHomeStreet("321 Spruce Street");
-person4.setHomeUnitNumber("Apt 8D");
-person4.setHomeCity("Chicago");
-person4.setHomeState("Illinois");
-person4.setHomeZipCode("60601");
-person4.setHomePhoneNumber("3125559876");
-
-// Work Address for person4
-person4.setWorkStreet("123 Oak Boulevard");
-person4.setWorkUnitNumber("Suite 500");
-person4.setWorkCity("Chicago");
-person4.setWorkState("Illinois");
-person4.setWorkZipCode("60602");
-person4.setWorkPhoneNumber("3125554321");
-
-// Creating fifth Person object
-Person person5 = personDirectory.addPerson();
-person5.setFirstName("David");
-person5.setLastName("Brown");
-person5.setEmail("david.brown@example.com");
-person5.setAge(45);
-person5.setHeight(1.85); // height in meters
-person5.setSocialSecurityNumber(654789123L);
-person5.setGender('M');
-
-// Home Address for person5
-person5.setHomeStreet("789 Ash Street");
-person5.setHomeUnitNumber("House 15");
-person5.setHomeCity("Houston");
-person5.setHomeState("Texas");
-person5.setHomeZipCode("77001");
-person5.setHomePhoneNumber("7135554321");
-
-// Work Address for person5
-person5.setWorkStreet("987 Maple Boulevard");
-person5.setWorkUnitNumber("Office 101");
-person5.setWorkCity("Houston");
-person5.setWorkState("Texas");
-person5.setWorkZipCode("77002");
-person5.setWorkPhoneNumber("7135555678");
+    // Home and Work Address for person5
+    Address homeAddress5 = new Address("789 Ash Street", "House 15", "Houston", "Texas", "77001", "7135554321");
+    Address workAddress5 = new Address("987 Maple Boulevard", "Office 101", "Houston", "Texas", "77002", "7135555678");
+    person5.setHomeAddress(homeAddress5);
+    person5.setWorkAddress(workAddress5);
 }
 
     }

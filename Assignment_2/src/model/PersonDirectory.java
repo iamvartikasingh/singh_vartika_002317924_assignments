@@ -13,12 +13,12 @@ package model;
 import java.util.ArrayList;
 
 public class PersonDirectory {
-    
+
     private ArrayList<Person> persons;
 
     // Constructor initializes the ArrayList
     public PersonDirectory() {
-        this.persons = new ArrayList<Person>();
+        this.persons = new ArrayList<>();
     }
 
     // Getter for the persons list
@@ -42,28 +42,30 @@ public class PersonDirectory {
     public void deletePerson(Person person) {
         persons.remove(person);
     }
- 
-    // Method to search for a Person by their first and last name
- public Person searchPerson(String searchValue) {
-    for (Person p : persons) {
-        // Check if the search value matches first name, last name, or street address
-        if (p.getFirstName().equalsIgnoreCase(searchValue) || 
-            p.getLastName().equalsIgnoreCase(searchValue) || 
-            p.getWorkStreet().equalsIgnoreCase(searchValue) ||
-            p.getHomeStreet().equalsIgnoreCase(searchValue)) {
-            return p;
+
+    // Method to search for a Person by first name, last name, or street address
+    public Person searchPerson(String searchValue) {
+        for (Person p : persons) {
+            // Check if the search value matches first name, last name, or any address street
+            if (p.getFirstName().equalsIgnoreCase(searchValue) ||
+                p.getLastName().equalsIgnoreCase(searchValue) ||
+                (p.getHomeAddress() != null && p.getHomeAddress().getStreet().equalsIgnoreCase(searchValue)) ||
+                (p.getWorkAddress() != null && p.getWorkAddress().getStreet().equalsIgnoreCase(searchValue))) {
+                return p;
+            }
         }
+        return null;
     }
-    return null;
-}
-public Person findPersonByEmail(String email) {
-    for (Person person : persons) {  // Assuming `persons` is the list of Person objects
-        if (person.getEmail().equalsIgnoreCase(email)) {
-            return person;
+
+    // Method to search for a Person by their email
+    public Person findPersonByEmail(String email) {
+        for (Person person : persons) {
+            if (person.getEmail().equalsIgnoreCase(email)) {
+                return person;
+            }
         }
+        return null;  // If no person is found with the given email
     }
-    return null;  // If no person is found with the given email
-}
 }
 
   

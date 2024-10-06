@@ -189,8 +189,7 @@ if (selectedRow >= 0) {
     // End of variables declaration//GEN-END:variables
 
 void populateTable() {
-    
-    
+
     DefaultTableModel model = (DefaultTableModel) tblPersons.getModel(); // Assuming tblPersons is the table for Person objects
     model.setRowCount(0);
 
@@ -200,26 +199,45 @@ void populateTable() {
         // Combine first name and last name
         row[0] = p.getFirstName() + " " + p.getLastName();
 
-        // Add age, gender, and email
+        // Add age, gender, email, SSN, and height
         row[1] = p.getAge();
         row[2] = p.getGender();
         row[3] = p.getEmail();
         row[4] = p.getSocialSecurityNumber();
         row[5] = p.getHeight();
 
-        // Home address details
-        row[6] = p.getHomeStreet() + " " + p.getHomeUnitNumber();
-        row[7] = p.getHomeCity();
-        row[8] = p.getHomeState();
-        row[9] = p.getHomeZipCode();
-        row[10] = p.getHomePhoneNumber();
+        // Home address details (check if home address exists)
+        if (p.getHomeAddress() != null) {
+            row[6] = p.getHomeAddress().getStreet() + " " + p.getHomeAddress().getUnitNumber();
+            row[7] = p.getHomeAddress().getCity();
+            row[8] = p.getHomeAddress().getState();
+            row[9] = p.getHomeAddress().getZipCode();
+            row[10] = p.getHomeAddress().getPhoneNumber();
+        } else {
+            // If no home address, set empty or default values
+            row[6] = "";
+            row[7] = "";
+            row[8] = "";
+            row[9] = "";
+            row[10] = "";
+        }
 
-        // Work address details
-        row[11] = p.getWorkStreet() + " " + p.getWorkUnitNumber();
-        row[12] = p.getWorkCity();
-        row[13] = p.getWorkState();
-        row[14] = p.getWorkZipCode();
-        row[15] = p.getWorkPhoneNumber();
+        // Work address details (check if work address exists)
+        if (p.getWorkAddress() != null) {
+            row[11] = p.getWorkAddress().getStreet() + " " + p.getWorkAddress().getUnitNumber();
+            row[12] = p.getWorkAddress().getCity();
+            row[13] = p.getWorkAddress().getState();
+            row[14] = p.getWorkAddress().getZipCode();
+            row[15] = p.getWorkAddress().getPhoneNumber();
+        } else {
+            // If no work address, set empty or default values
+            row[11] = "";
+            row[12] = "";
+            row[13] = "";
+            row[14] = "";
+            row[15] = "";
+        }
+
         model.addRow(row);
     }
 }
