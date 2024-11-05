@@ -32,7 +32,7 @@ public class Info5001UniversityExample {
     
     public static void main(String[] args) {
         // TODO code application logic here
-      Department department = new Department("Computer Science"); // one department
+     Department department = new Department("Computer Science"); // one department
         PersonDirectory pd = department.getPersonDirectory();
         
         // Adding people for students
@@ -134,7 +134,7 @@ public class Info5001UniversityExample {
         courseOffer6.AssignAsTeacher(f2);
         courseOffer7.AssignAsTeacher(f3);
 
-        // Creating course loads for students
+        // Creating course loads for students and ensuring a minimum of 20 registrations
         CourseLoad courseLoad1 = student1.newCourseLoad("Fall2024");
         CourseLoad courseLoad2 = student2.newCourseLoad("Fall2024");
         CourseLoad courseLoad3 = student3.newCourseLoad("Fall2024");
@@ -146,42 +146,50 @@ public class Info5001UniversityExample {
         CourseLoad courseLoad9 = student9.newCourseLoad("Fall2024");
         CourseLoad courseLoad10 = student10.newCourseLoad("Fall2024");
 
-        // Register students in courses
+        // Register students in courses to meet the 20 unique registrations requirement
         courseLoad1.newSeatAssignment(courseOffer1);
         courseLoad1.newSeatAssignment(courseOffer2);
+
         courseLoad2.newSeatAssignment(courseOffer2);
         courseLoad2.newSeatAssignment(courseOffer1);
+
         courseLoad3.newSeatAssignment(courseOffer3);
         courseLoad3.newSeatAssignment(courseOffer1);
+
         courseLoad4.newSeatAssignment(courseOffer1);
         courseLoad4.newSeatAssignment(courseOffer2);
+
         courseLoad5.newSeatAssignment(courseOffer2);
-        courseLoad5.newSeatAssignment(courseOffer1);
-        courseLoad6.newSeatAssignment(courseOffer1);
-        courseLoad6.newSeatAssignment(courseOffer2);
-        courseLoad7.newSeatAssignment(courseOffer1);
+        courseLoad5.newSeatAssignment(courseOffer3);
+
+        courseLoad6.newSeatAssignment(courseOffer4);
+        courseLoad6.newSeatAssignment(courseOffer5);
+
         courseLoad7.newSeatAssignment(courseOffer6);
-        courseLoad8.newSeatAssignment(courseOffer2);
+        courseLoad7.newSeatAssignment(courseOffer7);
+
         courseLoad8.newSeatAssignment(courseOffer1);
-        courseLoad9.newSeatAssignment(courseOffer3);
-        courseLoad9.newSeatAssignment(courseOffer1);
-        courseLoad10.newSeatAssignment(courseOffer1);
-        courseLoad10.newSeatAssignment(courseOffer3);
+        courseLoad8.newSeatAssignment(courseOffer6);
+
+        courseLoad9.newSeatAssignment(courseOffer7);
+        courseLoad9.newSeatAssignment(courseOffer4);
+
+        courseLoad10.newSeatAssignment(courseOffer5);
+        courseLoad10.newSeatAssignment(courseOffer6);
+
         // Assigning grades to students
         assignGrade(courseLoad1, courseOffer1.toString(), courseOffer2.toString(), "A", "A");
         assignGrade(courseLoad2, courseOffer2.toString(), courseOffer1.toString(), "B", "A");
         assignGrade(courseLoad3, courseOffer3.toString(), courseOffer1.toString(), "A", "B");
         assignGrade(courseLoad4, courseOffer1.toString(), courseOffer2.toString(), "B", "B");
-        assignGrade(courseLoad5, courseOffer2.toString(), courseOffer1.toString(), "A", "A");
-        assignGrade(courseLoad6, courseOffer1.toString(), courseOffer2.toString(), "B", "A");
-        assignGrade(courseLoad7, courseOffer1.toString(), courseOffer6.toString(), "A", "B");
-        assignGrade(courseLoad8, courseOffer2.toString(), courseOffer1.toString(), "B", "A");
-        assignGrade(courseLoad9, courseOffer3.toString(), courseOffer1.toString(), "A", "B");
-        assignGrade(courseLoad10, courseOffer1.toString(), courseOffer3.toString(), "B", "A");
+        assignGrade(courseLoad5, courseOffer2.toString(), courseOffer3.toString(), "A", "A");
+        assignGrade(courseLoad6, courseOffer4.toString(), courseOffer5.toString(), "B", "A");
+        assignGrade(courseLoad7, courseOffer6.toString(), courseOffer7.toString(), "A", "B");
+        assignGrade(courseLoad8, courseOffer1.toString(), courseOffer6.toString(), "B", "A");
+        assignGrade(courseLoad9, courseOffer7.toString(), courseOffer4.toString(), "A", "B");
+        assignGrade(courseLoad10, courseOffer5.toString(), courseOffer6.toString(), "B", "A");
 
-        
-        
-         System.out.println("---------------------------- Report For Fall 2024 Semester -----------------------------");
+        System.out.println("---------------------------- Report For Fall 2024 Semester -----------------------------");
         for(StudentProfile sp: sd.getStudentProfiles()){
             System.out.println("-------------------------------------------------------------------------------------");
             try{
@@ -195,19 +203,16 @@ public class Info5001UniversityExample {
                             + co.getSubjectCourse().getCoursePrice() + ".00");
                 }
                 Float averageGpa = sp.getCourseLoadBySemester("Fall2024").getSemesterScore()/ sp.getCourseLoadBySemester("Fall2024").getSeatAssignments().size();
-                System.out.println("\nAverage Gpa of " + sp + " : " + Float.toString(averageGpa));
+                System.out.println("\nAverage GPA of " + sp + " : " + Float.toString(averageGpa));
             }catch(NullPointerException e){
                 System.out.println("Not registered for any courses");
             }
             System.out.println("-------------------------------------------------------------------------------------");
         }
-    
-
     }
     
     private static void assignGrade(CourseLoad cl, String course1, String course2, String grade1, String grade2) {
-    cl.getSeatAssignments().get(0).addGrade(cl.getSeatAssignments().get(0).getCourseOffer().getCourseNumber().equals(course1) ? grade1 : "B-");
-    cl.getSeatAssignments().get(1).addGrade(cl.getSeatAssignments().get(1).getCourseOffer().getCourseNumber().equals(course2) ? grade2 : "B-");
+        cl.getSeatAssignments().get(0).addGrade(cl.getSeatAssignments().get(0).getCourseOffer().getCourseNumber().equals(course1) ? grade1 : "B-");
+        cl.getSeatAssignments().get(1).addGrade(cl.getSeatAssignments().get(1).getCourseOffer().getCourseNumber().equals(course2) ? grade2 : "B-");
     }
-
 }
