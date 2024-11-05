@@ -32,40 +32,40 @@ public class Info5001UniversityExample {
     
     public static void main(String[] args) {
         // TODO code application logic here
-     Department department = new Department("Computer Science"); // one department
+      Department department = new Department("Computer Science"); // one department
         PersonDirectory pd = department.getPersonDirectory();
         
-        // Adding people for students and professors
-        Person person1 = pd.newPerson("person1");
-        Person person2 = pd.newPerson("person2");
-        Person person3 = pd.newPerson("person3");
-        Person person4 = pd.newPerson("person4");
-        Person person5 = pd.newPerson("person5");
-        Person person6 = pd.newPerson("person6");
-        Person person7 = pd.newPerson("person7");
-        Person person8 = pd.newPerson("person8");
-        Person person9 = pd.newPerson("person9");
-        Person person10 = pd.newPerson("person10");
+        // Adding people for students
+        Person emma = pd.newPerson("Emma Watson");
+        Person liam = pd.newPerson("Liam Johnson");
+        Person olivia = pd.newPerson("Olivia Williams");
+        Person noah = pd.newPerson("Noah Brown");
+        Person ava = pd.newPerson("Ava Jones");
+        Person sophia = pd.newPerson("Sophia Garcia");
+        Person mason = pd.newPerson("Mason Martinez");
+        Person isabella = pd.newPerson("Isabella Rodriguez");
+        Person ethan = pd.newPerson("Ethan Wilson");
+        Person mia = pd.newPerson("Mia Anderson");
         
         // Adding people for professors
-        Person person11 = pd.newPerson("person11");
-        Person person12 = pd.newPerson("person12");
-        Person person13 = pd.newPerson("person13");
-        Person person14 = pd.newPerson("person14");
-        Person person15 = pd.newPerson("person15");
+        Person professor1 = pd.newPerson("Dr. Benjamin Carter");
+        Person professor2 = pd.newPerson("Dr. Amelia Hernandez");
+        Person professor3 = pd.newPerson("Dr. Oliver Miller");
+        Person professor4 = pd.newPerson("Dr. Charlotte Clark");
+        Person professor5 = pd.newPerson("Dr. Henry Lee");
         
         // Creating student profiles
         StudentDirectory sd = department.getStudentDirectory();
-        StudentProfile student1 = sd.newStudentProfile(person1);
-        StudentProfile student2 = sd.newStudentProfile(person2);
-        StudentProfile student3 = sd.newStudentProfile(person3);
-        StudentProfile student4 = sd.newStudentProfile(person4);
-        StudentProfile student5 = sd.newStudentProfile(person5);
-        StudentProfile student6 = sd.newStudentProfile(person6);
-        StudentProfile student7 = sd.newStudentProfile(person7);
-        StudentProfile student8 = sd.newStudentProfile(person8);
-        StudentProfile student9 = sd.newStudentProfile(person9);
-        StudentProfile student10 = sd.newStudentProfile(person10);
+        StudentProfile student1 = sd.newStudentProfile(emma);
+        StudentProfile student2 = sd.newStudentProfile(liam);
+        StudentProfile student3 = sd.newStudentProfile(olivia);
+        StudentProfile student4 = sd.newStudentProfile(noah);
+        StudentProfile student5 = sd.newStudentProfile(ava);
+        StudentProfile student6 = sd.newStudentProfile(sophia);
+        StudentProfile student7 = sd.newStudentProfile(mason);
+        StudentProfile student8 = sd.newStudentProfile(isabella);
+        StudentProfile student9 = sd.newStudentProfile(ethan);
+        StudentProfile student10 = sd.newStudentProfile(mia);
 
         // Adding new courses to the course catalog
         CourseCatalog courseCatalog = department.getCourseCatalog();
@@ -119,11 +119,11 @@ public class Info5001UniversityExample {
         // Creating faculty profiles and assigning them to course offers
         FacultyDirectory fd = department.getFacultyDirectory();
         
-        FacultyProfile f1 = fd.newFacultyProfile(person11);
-        FacultyProfile f2 = fd.newFacultyProfile(person12);
-        FacultyProfile f3 = fd.newFacultyProfile(person13);
-        FacultyProfile f4 = fd.newFacultyProfile(person14);
-        FacultyProfile f5 = fd.newFacultyProfile(person15);
+        FacultyProfile f1 = fd.newFacultyProfile(professor1);
+        FacultyProfile f2 = fd.newFacultyProfile(professor2);
+        FacultyProfile f3 = fd.newFacultyProfile(professor3);
+        FacultyProfile f4 = fd.newFacultyProfile(professor4);
+        FacultyProfile f5 = fd.newFacultyProfile(professor5);
         
         courseOffer.AssignAsTeacher(f1);
         courseOffer1.AssignAsTeacher(f2);
@@ -167,7 +167,6 @@ public class Info5001UniversityExample {
         courseLoad9.newSeatAssignment(courseOffer1);
         courseLoad10.newSeatAssignment(courseOffer1);
         courseLoad10.newSeatAssignment(courseOffer3);
-
         // Assigning grades to students
         assignGrade(courseLoad1, courseOffer1.toString(), courseOffer2.toString(), "A", "A");
         assignGrade(courseLoad2, courseOffer2.toString(), courseOffer1.toString(), "B", "A");
