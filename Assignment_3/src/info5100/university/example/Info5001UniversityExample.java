@@ -134,7 +134,7 @@ public class Info5001UniversityExample {
         courseOffer6.AssignAsTeacher(f2);
         courseOffer7.AssignAsTeacher(f3);
 
-        // Creating course loads for students and ensuring a minimum of 20 registrations
+        
         CourseLoad courseLoad1 = student1.newCourseLoad("Fall2024");
         CourseLoad courseLoad2 = student2.newCourseLoad("Fall2024");
         CourseLoad courseLoad3 = student3.newCourseLoad("Fall2024");
@@ -146,7 +146,7 @@ public class Info5001UniversityExample {
         CourseLoad courseLoad9 = student9.newCourseLoad("Fall2024");
         CourseLoad courseLoad10 = student10.newCourseLoad("Fall2024");
 
-        // Register students in courses to meet the 20 unique registrations requirement
+        
         courseLoad1.newSeatAssignment(courseOffer1);
         courseLoad1.newSeatAssignment(courseOffer2);
 
@@ -177,7 +177,7 @@ public class Info5001UniversityExample {
         courseLoad10.newSeatAssignment(courseOffer5);
         courseLoad10.newSeatAssignment(courseOffer6);
 
-        // Assigning grades to students
+        
         assignGrade(courseLoad1, courseOffer1.toString(), courseOffer2.toString(), "A", "A");
         assignGrade(courseLoad2, courseOffer2.toString(), courseOffer1.toString(), "B", "A");
         assignGrade(courseLoad3, courseOffer3.toString(), courseOffer1.toString(), "A", "B");
