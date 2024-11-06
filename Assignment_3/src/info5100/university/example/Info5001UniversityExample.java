@@ -189,26 +189,32 @@ public class Info5001UniversityExample {
         assignGrade(courseLoad9, courseOffer7.toString(), courseOffer4.toString(), "A", "B");
         assignGrade(courseLoad10, courseOffer5.toString(), courseOffer6.toString(), "B", "A");
 
-        System.out.println("---------------------------- Report For Fall 2024 Semester -----------------------------");
-        for(StudentProfile sp: sd.getStudentProfiles()){
-            System.out.println("-------------------------------------------------------------------------------------");
-            try{
-                System.out.println("Student Name : " + sp + "\n");
-                System.out.println("Course Number - Faculty - Score - Course Price\n");
-                for(SeatAssignment seatAssigned : sp.getCourseLoadBySemester("Fall2024").getSeatAssignments()){
-                    CourseOffer co = seatAssigned.getCourseOffer();
-                    System.out.println(co.getCourseNumber() + " - "
-                            + co.getFacultyProfile() + " - "
-                            + Float.toString(seatAssigned.GetCourseStudentScore()) + " - $"
-                            + co.getSubjectCourse().getCoursePrice() + ".00");
-                }
-                Float averageGpa = sp.getCourseLoadBySemester("Fall2024").getSemesterScore()/ sp.getCourseLoadBySemester("Fall2024").getSeatAssignments().size();
-                System.out.println("\nAverage GPA of " + sp + " : " + Float.toString(averageGpa));
-            }catch(NullPointerException e){
-                System.out.println("Not registered for any courses");
-            }
-            System.out.println("-------------------------------------------------------------------------------------");
+    System.out.println("================================= Report For Fall 2024 Semester =================================");
+for (StudentProfile sp : sd.getStudentProfiles()) {
+    System.out.println("-----------------------------------------------------------------------------------------------");
+    try {
+        System.out.println("Student Name: " + sp);
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        System.out.printf("%-15s %-25s %-10s %-15s%n", "Course Number", "Faculty", "Score", "Course Price");
+        System.out.println("-----------------------------------------------------------------------------------------------");
+
+        for (SeatAssignment seatAssigned : sp.getCourseLoadBySemester("Fall2024").getSeatAssignments()) {
+            CourseOffer co = seatAssigned.getCourseOffer();
+            System.out.printf("%-15s %-25s %-10s $%-15s%n",
+                    co.getCourseNumber(),
+                    co.getFacultyProfile(),
+                    Float.toString(seatAssigned.GetCourseStudentScore()),
+                    co.getSubjectCourse().getCoursePrice() + ".00");
         }
+
+        Float averageGpa = sp.getCourseLoadBySemester("Fall2024").getSemesterScore() / sp.getCourseLoadBySemester("Fall2024").getSeatAssignments().size();
+        System.out.println("\nAverage GPA of " + sp + ": " + Float.toString(averageGpa));
+    } catch (NullPointerException e) {
+        System.out.println("Not registered for any courses");
+    }
+    System.out.println("-----------------------------------------------------------------------------------------------");
+}
+System.out.println("================================================================================================");
     }
     
     private static void assignGrade(CourseLoad cl, String course1, String course2, String grade1, String grade2) {
